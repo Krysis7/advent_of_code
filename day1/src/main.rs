@@ -20,7 +20,7 @@ fn read_input_file(file_path: &str) -> io::Result<(Vec<i32>, Vec<i32>)> {
     Ok((array1, array2))
 }
 
-fn main() {
+fn part1() {
     let file_path = "day1_input.txt";
 
     let (mut array1, mut array2) = match read_input_file(file_path) {
@@ -42,4 +42,34 @@ fn main() {
         .sum();
 
     println!("{}", distance);
+}
+
+fn part2() {
+    let file_path = "day1_input.txt";
+
+    let (array1, array2) = match read_input_file(file_path) {
+        Ok((arr1, arr2)) => (arr1, arr2),
+        Err(e) => {
+            eprintln!("Error: {}", e);
+            return;
+        }
+    };
+
+    let mut distance = 0;
+
+    for number in array1.iter() {
+        let mut sum:i32 = 0;
+        for number2 in array2.iter() {
+            if number == number2 {
+                sum += 1;
+            }
+        }
+        distance += number * sum;
+    }
+    println!("{}", distance);
+}
+
+fn main() {
+    part1();
+    part2();
 }
