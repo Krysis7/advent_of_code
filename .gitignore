@@ -1,0 +1,47 @@
+# Ignore build output directory
+/target/
+
+# Ignore Rust object files
+*.o
+
+# Ignore compiled dynamic libraries
+*.dylib
+*.so
+*.dll
+
+# Ignore .bin files (binary files)
+*.bin
+
+# Ignore Cargo lock file (optional for applications; libraries should commit it)
+/Cargo.lock
+
+# Ignore IDE or editor-specific directories and files
+.vscode/
+.idea/
+
+# Ignore temporary files created by editors
+*.swp
+*.swo
+*.bak
+*~
+
+# Ignore macOS-specific files
+.DS_Store
+
+# Ignore Windows-specific files
+Thumbs.db
+
+# Ignore Rust documentation generated files
+/doc/
+
+# Ignore vendor directory (if using cargo vendor)
+/vendor/
+
+# Ignore backup files
+*.bak
+*.tmp
+*.log
+
+# Ignore build output directory
+/target/
+
