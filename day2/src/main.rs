@@ -19,9 +19,32 @@ fn read_input_file(file_path: &str) -> io::Result<Vec<Vec<i32>>> {
     Ok(reports)
 }
 
+fn safe_checker(array: &Vec<i32>) -> bool {
+    let mut ascending = array[0] < array[1];
+
+    if array.len() < 2 {
+        // check length not less than 2;
+        return false;
+    }
+
+    for (current, next) in array.windows(2).map(|n| (n[0], n[1])) {
+        let diff = (current - next).abs();
+        // check greater then 3
+        if  diff < 1 || diff > 3 {
+            return false;
+        }
+
+        // check trend direction
+        if (current < next && !ascending) || (current > next && ascending) || (current == next) {
+            return false;
+        }
+        ascending = current < next;
+    }
+    true
+}
+
 fn part1() {
     let file_path = "day2_input.txt";
-
     let report = match read_input_file(file_path) {
         Ok(reports) => reports,
         Err(e) => {
@@ -33,32 +56,7 @@ fn part1() {
     let mut success = 0;
 
     for array in report.iter() {
-        if array.len() < 2 {
-            // check length not less than 2;
-            break;
-        }
-
-        // check trend for first 2 value
-        let mut ascending = array[0] < array[1];
-        let mut valid = true;
-
-        for (current, next) in array.windows(2).map(|n| (n[0], n[1])) {
-            let diff = (current - next).abs();
-            // check greater then 3
-            if  diff < 1 || diff > 3 {
-                valid = false;
-                // fails the check
-                break;
-            }
-
-            // check trend direction
-            if (current < next && !ascending) || (current > next && ascending) || (current == next) {
-                valid = false;
-                break;
-            }
-            ascending = current < next;
-        }
-        if valid {
+        if safe_checker(&array) {
             success += 1;
         }
     }
