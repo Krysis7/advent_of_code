@@ -24,6 +24,8 @@
 *.swo
 *.bak
 *~
+**/*.rs.bk
+*.pdb
 
 # Ignore macOS-specific files
 .DS_Store
@@ -44,4 +46,5 @@ Thumbs.db
 
 # Ignore build output directory
 /target/
-
+debug/
+.rustc_info.json
